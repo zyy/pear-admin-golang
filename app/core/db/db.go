@@ -2,23 +2,24 @@ package db
 
 import (
 	"fmt"
-	"github.com/cilidm/toolbox/file"
-	"github.com/gchaincl/dotsql"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"os"
 	"pear-admin-go/app/core/config"
 	"pear-admin-go/app/core/log"
 	"pear-admin-go/app/global/initial"
 	"pear-admin-go/app/model"
+
+	"github.com/cilidm/toolbox/file"
+	"github.com/gchaincl/dotsql"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
 var conn *gorm.DB
 
 func Instance() *gorm.DB {
 	if conn == nil {
-		InitConn()
+		panic("db conn is nil")
 	}
 	return conn
 }

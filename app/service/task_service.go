@@ -38,7 +38,7 @@ func TaskJson(f request.TaskPage) ([]model.TaskResp, int, error) {
 
 func TaskAdd(f request.TaskForm) error {
 	if f.SourceType == e.Local && f.DstType == e.Local {
-		return errors.New("亲，此模式尚未开发，本地复制请使用复制粘贴功能~")
+		return errors.New("亲，此模式尚未开发，本地复制的话使用复制粘贴更快哦~")
 	}
 	var s model.Task
 	err := str.CopyFields(&s, f)

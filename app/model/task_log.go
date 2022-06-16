@@ -11,5 +11,6 @@ type TaskLog struct {
 	SourcePath string    `json:"source_path"`
 	DstPath    string    `json:"dst_path"`
 	Size       int64     `json:"size"`
+	MD         string    `json:"md"`
 	CreateTime time.Time `json:"create_time"`
 }
