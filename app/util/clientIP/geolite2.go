@@ -6,6 +6,9 @@ import (
 )
 
 func GetCityByIP(ipAddr string) (string, error) {
+	if ipAddr == "127.0.0.1" || ipAddr == "::1" {
+		return "本地内网", nil
+	}
 	db, err := geoip2.Open("database/GeoLite2-City.mmdb")
 	if err != nil {
 		return "", err
@@ -16,9 +19,13 @@ func GetCityByIP(ipAddr string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if record.City.Names["zh-CN"] == "" {
-		return record.Subdivisions[0].Names["zh-CN"], nil
+	if len(record.City.Names) > 0 {
+		if record.City.Names["zh-CN"] == "" && len(record.Subdivisions) > 0 {
+			return record.Subdivisions[0].Names["zh-CN"], nil
+		} else {
+			return record.City.Names["zh-CN"], nil
+		}
 	} else {
-		return record.City.Names["zh-CN"], nil
+		return "未知地址", nil
 	}
 }
